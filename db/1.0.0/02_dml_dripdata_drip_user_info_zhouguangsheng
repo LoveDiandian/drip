@@ -1,0 +1,48 @@
+--The useage of how to use cursor
+
+CREATE FUNCTION test_func() RETURNS integer AS $$
+DECLARE
+    mviews RECORD;
+		v_cursor_created_date cursor for
+			SELECT to_char(created_date::TIMESTAMP, 'yyyy-MM-dd') created_date
+			from pos_accept
+			GROUP BY to_char(created_date::TIMESTAMP, 'yyyy-MM-dd')
+			order by to_char(created_date::TIMESTAMP, 'yyyy-MM-dd');
+
+		v_cursor_pos_accept_daily cursor(datevar varchar) FOR
+			SELECT  all_policy_no policy_no,
+							pos_status policy_status,
+							pos_apply->>'policyNo' order_no
+			FROM pos_accept
+			WHERE to_char(created_date, 'yyyy-MM-dd')=datevar;
+
+			v_policy_no pos_accept.all_policy_no%type;
+			v_policy_status pos_accept.all_policy_no%type;
+			v_order_no pos_accept.all_policy_no%type;
+BEGIN
+    RAISE NOTICE 'Refreshing materialized views...';
+
+		FOR recordvar IN v_cursor_created_date LOOP
+			RAISE NOTICE '创建日期 % ...',recordvar.created_date;--日志打印
+			OPEN v_cursor_pos_accept_daily(recordvar.created_date);
+			LOOP
+				FETCH v_cursor_pos_accept_daily into v_policy_no,v_policy_status,v_order_no;
+
+				if found then
+						raise notice '保单号: %',v_policy_no;
+						raise notice '保单状态: %',v_policy_status;
+						raise notice '订单号: %',v_order_no;
+				else
+				 exit;
+				end if;
+			END LOOP;
+			CLOSE v_cursor_pos_accept_daily;
+		END LOOP;
+
+    RAISE NOTICE 'Done refreshing materialized views.';
+    RETURN 1;
+END;
+$$ LANGUAGE plpgsql;
+
+select test_func();
+
