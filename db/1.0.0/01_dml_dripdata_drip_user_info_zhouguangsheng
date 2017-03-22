@@ -1,0 +1,16 @@
+-- The useage of case-when
+SELECT
+	all_policy_no,CURRENT_TIMESTAMP as updated_date,case pos_status
+WHEN 'approvePassFromCore' THEN 'SURRNDER'
+WHEN 'paymentExosystemSuccess' THEN 'SURRNDER'
+WHEN 'paymentToCoreFinancial' THEN 'SURRNDER' END as pos_status
+FROM
+	"pos_accept"
+WHERE
+	pos_status IN (
+		'approvePassFromCore',
+		'paymentExosystemSuccess',
+		'paymentToCoreFinancial'
+	)
+
+order by all_policy_no desc
