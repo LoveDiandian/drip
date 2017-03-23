@@ -1,5 +1,6 @@
 package com.drip.sftp;
 
+import com.drip.sftp.monitor.FileProgressMonitor;
 import com.jcraft.jsch.ChannelSftp;
 
 import java.io.File;
