@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n" />
+		</layout>
+	</appender>
+
+	<appender name="normal" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ht_service_cliservice/normal.log" />
+		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n" />
+		</layout>
+	</appender>
+
+	<appender name="tencent" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ht_service_cliservice/tencent.log" />
+		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="mq" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ht_service_cliservice/mq.log" />
+		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="underwrite" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ht_service_cliservice/underwrite.log" />
+		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ht_service_cliservice/ht_service_cliservice.out" />
+		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="redis_appender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/ht_service_cliservice/redis.log" />
+		<param name="Append" value="true" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}]|%X{serial_no}|%X{SERVER_NAME}|%-5p|%t|%C|%M|%m%n" />
+		</layout>
+	</appender>
+
+	<appender name="nomal_async" class="org.apache.log4j.AsyncAppender">
+		<param name="LocationInfo" value="true"/>
+		<param name="BufferSize" value="4096" />
+		<appender-ref ref="normal" />
+	</appender>
+
+	<appender name="tencent_async" class="org.apache.log4j.AsyncAppender">
+		<param name="LocationInfo" value="true"/>
+		<param name="BufferSize" value="4096" />
+		<appender-ref ref="tencent" />
+	</appender>
+
+	<appender name="mq_async" class="org.apache.log4j.AsyncAppender">
+		<param name="LocationInfo" value="true"/>
+		<param name="BufferSize" value="4096" />
+		<appender-ref ref="mq" />
+	</appender>
+
+	<appender name="underwrite_async" class="org.apache.log4j.AsyncAppender">
+		<param name="LocationInfo" value="true"/>
+		<param name="BufferSize" value="4096" />
+		<appender-ref ref="underwrite" />
+	</appender>
+
+	<appender name="file_async" class="org.apache.log4j.AsyncAppender">
+		<param name="LocationInfo" value="true"/>
+		<param name="BufferSize" value="4096" />
+		<appender-ref ref="file" />
+	</appender>
+
+	<appender name="redis_async" class="org.apache.log4j.AsyncAppender">
+		<param name="LocationInfo" value="true"/>
+		<param name="BufferSize" value="4096" />
+		<appender-ref ref="redis_appender" />
+	</appender>
+
+	<logger name="normal" additivity="false">
+		<level value="info" />
+		<appender-ref ref="nomal_async"/>
+	</logger>
+
+	<logger name="tencent" additivity="false">
+		<level value="info" />
+		<appender-ref ref="tencent_async"/>
+	</logger>
+
+	<logger name="mq" additivity="false">
+		<level value="info" />
+		<appender-ref ref="mq_async"/>
+	</logger>
+
+	<logger name="underwrite" additivity="false">
+		<level value="info" />
+		<appender-ref ref="underwrite_async"/>
+	</logger>
+
+	<logger name="redis" additivity="false">
+		<level value="info" />
+		<appender-ref ref="redis_async"/>
+	</logger>
+
+	<logger name="com.hetai.cliservice" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+
+	<root>
+		<level value="debug" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>
