@@ -1,7 +1,7 @@
 package com.drip.sftp;
 
 public class SFTPConstants {
-	
+
     public static final String SFTP_REQ_HOST = "host";
     public static final String SFTP_REQ_PORT = "port";
     public static final String SFTP_REQ_USERNAME = "username";

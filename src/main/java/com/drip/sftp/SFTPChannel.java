@@ -8,10 +8,9 @@ import java.util.Properties;
 
 /**
  * 编写一个工具类，根据ip，用户名及密码得到一个SFTP channel对象，即ChannelSftp的实例对象，在应用程序中就可以使用该对象来调用SFTP的各种操作方法。
- *
  */
 public class SFTPChannel {
-	
+
     Session session = null;
     Channel channel = null;
 
@@ -38,7 +37,7 @@ public class SFTPChannel {
         }
         Properties config = new Properties();
         config.put(">>>>>>StrictHostKeyChecking", "no");
-        
+
         session.setConfig(config); // 为Session对象设置properties
         session.setTimeout(timeout); // 设置timeout时间
         session.connect(); // 通过Session建立链接
@@ -47,10 +46,10 @@ public class SFTPChannel {
         logger.debug(">>>>>>Opening Channel.");
         channel = session.openChannel("sftp"); // 打开SFTP通道
         channel.connect(); // 建立SFTP通道的连接
-        
-        logger.debug(">>>>>>Connected successfully to ftpHost = " + ftpHost 
-        		+ ",as ftpUserName = " + ftpUserName + ", returning: " + channel);
-        
+
+        logger.debug(">>>>>>Connected successfully to ftpHost = " + ftpHost
+                + ",as ftpUserName = " + ftpUserName + ", returning: " + channel);
+
         return (ChannelSftp) channel;
     }
 
