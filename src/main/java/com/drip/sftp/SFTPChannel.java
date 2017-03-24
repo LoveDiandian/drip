@@ -18,6 +18,7 @@ public class SFTPChannel {
 
     public ChannelSftp getChannel(Map<String, String> sftpDetails, int timeout) throws JSchException {
 
+
         String ftpHost = sftpDetails.get(SFTPConstants.SFTP_REQ_HOST);
         String port = sftpDetails.get(SFTPConstants.SFTP_REQ_PORT);
         String ftpUserName = sftpDetails.get(SFTPConstants.SFTP_REQ_USERNAME);
