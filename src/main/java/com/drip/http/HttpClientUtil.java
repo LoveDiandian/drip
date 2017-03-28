@@ -22,6 +22,10 @@ public class HttpClientUtil {
 
     //第一次提交
 
+    //第二次提交
+
+    //第三次提交
+
     class IdleConnectionMonitorThread extends Thread {
         private final PoolingHttpClientConnectionManager connMgr;
         private volatile boolean                         shutdown;
