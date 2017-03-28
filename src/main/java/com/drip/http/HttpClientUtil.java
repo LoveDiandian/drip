@@ -20,6 +20,7 @@ public class HttpClientUtil {
     private IdleConnectionMonitorThread idleConnectionMonitorThread = null;
     private Gson gson = new Gson();
 
+    //第一次
 
     class IdleConnectionMonitorThread extends Thread {
         private final PoolingHttpClientConnectionManager connMgr;
