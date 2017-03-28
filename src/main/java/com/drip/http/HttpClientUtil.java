@@ -21,6 +21,8 @@ public class HttpClientUtil {
     private Gson gson = new Gson();
 
     //第一次
+    //第二次
+
 
     class IdleConnectionMonitorThread extends Thread {
         private final PoolingHttpClientConnectionManager connMgr;
