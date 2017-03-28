@@ -20,7 +20,7 @@ public class HttpClientUtil {
     private IdleConnectionMonitorThread idleConnectionMonitorThread = null;
     private Gson gson = new Gson();
 
-    //第二次提交
+
 
     //第三次提交
 
